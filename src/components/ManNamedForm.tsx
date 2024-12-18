@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Card, Divider, Form, Radio, Input, Select, Button, ConfigProvider, FloatButton } from 'antd';
-import { CommentOutlined, ArrowUpOutlined, MenuFoldOutlined, SyncOutlined } from '@ant-design/icons';
+import { Card, Space, Divider, Form, Radio, Input, Select, Button, ConfigProvider, FloatButton } from 'antd';
+import { ArrowUpOutlined, MenuFoldOutlined, SyncOutlined } from '@ant-design/icons';
 import type { RadioChangeEvent } from 'antd';
 import { createStyles } from 'antd-style';
 import { nameOrigin, meanAndTheme } from '@/assets/nameOrigin';
@@ -31,7 +31,7 @@ const ManNamedForm: React.FC = () => {
         fontSize: '20px'
     }
     return (
-        <section className='main' >
+        <section className={styles.main} >
             <FloatButton.Group
                 trigger="click"
                 style={{ insetInlineEnd: 24 }}
@@ -50,9 +50,11 @@ const ManNamedForm: React.FC = () => {
                     </div>
                     <Form.Item label={<label style={labelStyle}>What is your gender?</label>} name='gender'>
                         <Radio.Group onChange={onChange}>
-                            <Radio value={1}>Boy</Radio>
-                            <Radio value={2}>Girl</Radio>
-                            <Radio value={3}>Unknown</Radio>
+                            <Space direction="vertical">
+                                <Radio value={1}>Boy</Radio>
+                                <Radio value={2}>Girl</Radio>
+                                <Radio value={3}>Unknown</Radio>
+                            </Space>
                         </Radio.Group>
                     </Form.Item>
                     <Form.Item label={<label style={labelStyle}>What is your preferred name origin?</label>} name='country'>
@@ -81,9 +83,12 @@ const ManNamedForm: React.FC = () => {
                     </Form.Item>
                     <Form.Item label={<label style={labelStyle}>Do you want a popular or unique name?</label>} name='popular'>
                         <Radio.Group onChange={onChange}>
-                            <Radio value={1}>Popular</Radio>
-                            <Radio value={2}>Unique</Radio>
-                            <Radio value={3}>No Preference</Radio>
+
+                            <Space direction="vertical">
+                                <Radio value={1}>Popular</Radio>
+                                <Radio value={2}>Unique</Radio>
+                                <Radio value={3}>No Preference</Radio>
+                            </Space>
                         </Radio.Group>
                     </Form.Item>
                     <Form.Item label={<label style={labelStyle}>Are there any names you would like to avoid due to personal reasons or associations?</label>} name='popular'>
@@ -91,12 +96,15 @@ const ManNamedForm: React.FC = () => {
                     </Form.Item>
                     <Form.Item label={<label style={labelStyle}>Would you like a name with a nickname or shortened version?</label>} name='popular'>
                         <Radio.Group onChange={onChange}>
-                            <Radio value={1}>Yes</Radio>
-                            <Radio value={2}>No</Radio>
-                            <Radio value={3}>No preference</Radio>
+
+                            <Space direction="vertical">
+                                <Radio value={1}>Yes</Radio>
+                                <Radio value={2}>No</Radio>
+                                <Radio value={3}>No preference</Radio>
+                            </Space>
                         </Radio.Group>
                     </Form.Item>
-                    <Form.Item>
+                    <Form.Item style={{ display: 'flex', justifyContent: 'center' }}>
                         <ConfigProvider
                             button={{
                                 className: gradientStyle.linearGradientButton

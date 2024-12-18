@@ -13,3 +13,17 @@
         }
     }
 }
+
+.main {
+    :global {
+        .ant-form-item-control-input-content {
+            display: flex;
+            justify-content: start;
+
+            .ant-space-item {
+                display: flex;
+                justify-content: start;
+            }
+        }
+    }
+}
