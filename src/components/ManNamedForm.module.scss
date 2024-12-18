@@ -1,0 +1,15 @@
+.form-introduce {
+    font-size: 18px;
+    font-weight: 450;
+}
+
+.form-divider {
+
+    :global {
+
+        .ant-divider-horizontal.ant-divider-with-text-center::before,
+        .ant-divider-horizontal.ant-divider-with-text-center::after {
+            border-top: 2px solid #F0F0F0;
+        }
+    }
+}

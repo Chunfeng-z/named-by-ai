@@ -10,4 +10,9 @@ export default defineConfig({
       editor: 'code',
     }),
   ],
+  resolve:{
+    alias:{
+      "@":'/src'
+    }
+  }
 })
