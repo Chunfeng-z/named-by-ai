@@ -1,45 +1,50 @@
 import React, { useState } from 'react';
-import { Card, Space, Divider, Form, Radio, Input, Select, Button, ConfigProvider, FloatButton } from 'antd';
-import { ArrowUpOutlined, MenuFoldOutlined, SyncOutlined } from '@ant-design/icons';
+import { Card, Space, Divider, Form, Radio, Input, Select, Button, ConfigProvider } from 'antd';
 import type { RadioChangeEvent } from 'antd';
 import { createStyles } from 'antd-style';
-import { nameOrigin, meanAndTheme } from '@/assets/nameOrigin';
+import { genderList, popularList, nameOrigin, meanAndTheme, nicknameList } from '@/assets/nameOrigin';
 import styles from './ManNamedForm.module.scss';
+import { NameResults } from './NameResults';
+
 
 
 
 const ManNamedForm: React.FC = () => {
-    const [value, setValue] = useState<number>(1);
     // 重命令避免与css module冲突
     const { styles: gradientStyle } = useStyle();
-    const onChange = (e: RadioChangeEvent) => {
-        console.log('radio checked', e.target.value);
-        setValue(e.target.value);
+    const [gender, setGender] = useState<string>('');
+    const [origin, setOrigin] = useState<string>('');
+    const [mean, setMean] = useState<string>('');
+    const [popular, setPopular] = useState<string>('');
+    const [avoidNames, setAvoidNames] = useState<string>('xxx');
+    const [nickname, setNickname] = useState<string>('');
+    const [response, setResponse] = useState<string>("x");
+    const onGenderChange = (e: RadioChangeEvent) => {
+        setGender(e.target.value);
     };
-    const onChangeSelect = (value: string) => {
-        console.log(`selected ${value}`);
+    const onOriginChangeSelect = (value: string) => {
+        setOrigin(value);
     };
-
-    const onSearch = (value: string) => {
-        console.log('search:', value);
+    const onMeanChangeSelect = (value: string) => {
+        setMean(value);
+    }
+    const onPopularChange = (e: RadioChangeEvent) => {
+        setPopular(e.target.value);
     };
+    const onNicknameChange = (e: RadioChangeEvent) => {
+        setNickname(e.target.value);
+    }
+    // 下拉框选项
     const nameOriginOptions = getOptions(nameOrigin);
     const meanAndThemeOptions = getOptions(meanAndTheme);
-
+    // form label
     const labelStyle = {
         fontWeight: 650,
         fontSize: '20px'
     }
     return (
         <section className={styles.main} >
-            <FloatButton.Group
-                trigger="click"
-                style={{ insetInlineEnd: 24 }}
-                icon={<MenuFoldOutlined />}
-            >
-                <FloatButton icon={<SyncOutlined />} tooltip={<div>Chinese</div>} />
-                <FloatButton icon={<ArrowUpOutlined />} tooltip={<div>Up</div>} />
-            </FloatButton.Group>
+
             <Card bordered={false} style={{ maxWidth: 650, fontSize: '20px' }} >
                 <Form layout='vertical' >
                     <p className={styles['form-introduce']}>
@@ -49,58 +54,54 @@ const ManNamedForm: React.FC = () => {
                         <Divider >Please fill out the form below</Divider>
                     </div>
                     <Form.Item label={<label style={labelStyle}>What is your gender?</label>} name='gender'>
-                        <Radio.Group onChange={onChange}>
+                        <Radio.Group onChange={onGenderChange}>
                             <Space direction="vertical">
-                                <Radio value={1}>Boy</Radio>
-                                <Radio value={2}>Girl</Radio>
-                                <Radio value={3}>Unknown</Radio>
+                                {genderList.map((item) => {
+                                    return <Radio key={item} value={item}>{item}</Radio>
+                                })}
                             </Space>
                         </Radio.Group>
                     </Form.Item>
-                    <Form.Item label={<label style={labelStyle}>What is your preferred name origin?</label>} name='country'>
+                    <Form.Item label={<label style={labelStyle}>What is your preferred name origin?</label>} name='origin'>
                         <Select
                             showSearch
                             placeholder="No Preference"
                             optionFilterProp="label"
-                            onChange={onChangeSelect}
-                            onSearch={onSearch}
+                            onChange={onOriginChangeSelect}
                             options={nameOriginOptions}
                             size="large"
                             variant="filled"
                         />
                     </Form.Item>
-                    <Form.Item label={<label style={labelStyle}>Would you like the name to have a specific meaning or theme?</label>} name='preference'>
+                    <Form.Item label={<label style={labelStyle}>Would you like the name to have a specific meaning or theme?</label>} name='mean'>
                         <Select
                             showSearch
                             placeholder="No Preference"
                             optionFilterProp="label"
-                            onChange={onChangeSelect}
-                            onSearch={onSearch}
+                            onChange={onMeanChangeSelect}
                             options={meanAndThemeOptions}
                             size="large"
                             variant="filled"
                         />
                     </Form.Item>
                     <Form.Item label={<label style={labelStyle}>Do you want a popular or unique name?</label>} name='popular'>
-                        <Radio.Group onChange={onChange}>
-
+                        <Radio.Group onChange={onPopularChange}>
                             <Space direction="vertical">
-                                <Radio value={1}>Popular</Radio>
-                                <Radio value={2}>Unique</Radio>
-                                <Radio value={3}>No Preference</Radio>
+                                {popularList.map((item) => {
+                                    return <Radio key={item} value={item}>{item}</Radio>
+                                })}
                             </Space>
                         </Radio.Group>
                     </Form.Item>
-                    <Form.Item label={<label style={labelStyle}>Are there any names you would like to avoid due to personal reasons or associations?</label>} name='popular'>
-                        <Input size="large" maxLength={80} showCount placeholder="e.g. Tim, Ethan" variant="filled" />
+                    <Form.Item label={<label style={labelStyle}>Are there any names you would like to avoid due to personal reasons or associations?</label>} name='avoid'>
+                        <Input size="large" maxLength={80} showCount placeholder="e.g. Tim, Ethan" variant="filled" onChange={(e) => setAvoidNames(e.target.value)} />
                     </Form.Item>
-                    <Form.Item label={<label style={labelStyle}>Would you like a name with a nickname or shortened version?</label>} name='popular'>
-                        <Radio.Group onChange={onChange}>
-
+                    <Form.Item label={<label style={labelStyle}>Would you like a name with a nickname or shortened version?</label>} name='nickname'>
+                        <Radio.Group onChange={onNicknameChange}>
                             <Space direction="vertical">
-                                <Radio value={1}>Yes</Radio>
-                                <Radio value={2}>No</Radio>
-                                <Radio value={3}>No preference</Radio>
+                                {nicknameList.map((item, index) => {
+                                    return <Radio key={index} value={item}>{item}</Radio>
+                                })}
                             </Space>
                         </Radio.Group>
                     </Form.Item>
@@ -114,7 +115,11 @@ const ManNamedForm: React.FC = () => {
                         </ConfigProvider>
                     </Form.Item>
                 </Form>
+                {
+                    response && <NameResults name="    <Switch checked={loading} onChange={setLoading} />  <Switch checked={loading} onChange={setLoading} />  <Switch checked={loading} onChange={setLoading} />  <Switch checked={loading} onChange={setLoading} />  <Switch checked={loading} onChange={setLoading} /><Switch checked={loading} onChange={setLoading} />" />
+                }
             </Card>
+
         </section >
     );
 }

@@ -1,3 +1,21 @@
+export const genderList: string[] = [
+    'Boy',
+    'Girl',
+    'Unknown',
+]
+
+export const popularList: string[] = [
+    'Popular',
+    'Unique',
+    'No preference',
+]
+
+export const nicknameList: string[] = [
+    'Yes',
+    'No',
+    'No preference',
+]
+
 export const nameOrigin: string[] = [
     'No Preference',
     'English',

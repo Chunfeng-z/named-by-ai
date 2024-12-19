@@ -1,0 +1,12 @@
+.name-results {
+    :global {
+        .ant-typography {
+            text-align: left;
+            font-size: 16px;
+
+            pre {
+                min-height: 100px;
+            }
+        }
+    }
+}
