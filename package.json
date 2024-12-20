@@ -2,7 +2,7 @@
   "name": "named-by-ai",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://Chunfeng-z.github.io/named-by-ai/",
+  "homepage": "https://chunfeng-z.github.io/named-by-ai/",
   "type": "module",
   "scripts": {
     "dev": "vite",
