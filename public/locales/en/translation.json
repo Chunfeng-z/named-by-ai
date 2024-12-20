@@ -1,3 +1,65 @@
 {
-    "中文": "Chinese"
+    "src.App.803547-0": "Modal",
+    "src.App.803547-1": "Up",
+    "components.PageHeader.592797-0": "Named By AI",
+    "components.PageFooter.083208-0": "AI Named My Pet",
+    "components.ManNamedForm.introduce": "  Through Named by AI, unveil the ideal name you need. This is a clever name generator that uses artificial intelligence to find unique and meaningful names tailored specifically to your preferences.",
+    "components.ManNamedForm.tip": "Please fill out the form below",
+    "components.ManNamedForm.q1": "What is your gender?",
+    "components.ManNamedForm.q2": "What is your preferred name origin?",
+    "components.ManNamedForm.q3": "Would you like the name to have a specific meaning or theme?",
+    "components.ManNamedForm.q4": "Do you want a popular or unique name?",
+    "components.ManNamedForm.q5": "Are there any names you would like to avoid due to personal reasons or associations?",
+    "components.ManNamedForm.q6": "Would you like a name with a nickname or shortened version?",
+    "genderList": {
+        "Boy": "Boy",
+        "Girl": "Girl",
+        "Unknown": "Unknow"
+    },
+    "nameOrigin": {
+        "No Preference": "No Preference",
+        "English": "English",
+        "Spanish": "Spanis",
+        "French": "French",
+        "German": "German",
+        "Italian": "Italian",
+        "Portuguese": "Portuguese",
+        "Irish": "Irish",
+        "Indian": "Indian",
+        "Japanese": "Japanese",
+        "Korean": "Korean",
+        "Chinese": "Chinese",
+        "Arabic": "Arabic",
+        "Russian": "Russian",
+        "Hebrew": "Hebrew"
+    },
+    "meanAndTheme": {
+        "No Preference": "No Preference",
+        "Nature": "Nature",
+        "Strength": "Strength",
+        "Love": "Love",
+        "Virtue": "Virtue",
+        "Luck": "Luck",
+        "Happiness": "Happiness",
+        "Courage": "Courage",
+        "Wisdom": "Wisdom",
+        "Beauty": "Beauty",
+        "Peace": "Peace",
+        "Mythical": "Mythical",
+        "Artistic": "Artistic",
+        "Historic": "Historic",
+        "Spiritual": "Spiritual",
+        "Other": "Other"
+    },
+    "popularList": {
+        "Popular": "Popular",
+        "Unique": "Unique",
+        "No Preference": "No Preference"
+    },
+    "nicknameList": {
+        "Yes": "Yes",
+        "No": "No",
+        "No Preference": "No Preference"
+    },
+    "generateName": "Generate Names"
 }

@@ -1,6 +1,6 @@
 import React, { useState, Suspense } from 'react'
 import { FloatButton, message, Spin } from 'antd'
-import { useTranslation, Trans } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import { MenuFoldOutlined, SyncOutlined, RobotOutlined } from '@ant-design/icons'
 import { modalOptions, ModalItem } from './assets/modalOptions'
 import i18n from './i18n/i18n'
@@ -16,9 +16,9 @@ const PageFooter = React.lazy(() => import('@/components/PageFooter'));
 const App: React.FC = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const { t } = useTranslation();
-  const [currentLang, setCurrentLang] = useState<string>(langs[i18n.language === 'zh_CN' ? 'zh' : 'en'].nativeName);
+  const [currentLang, setCurrentLang] = useState<string>(langs[i18n.language].nativeName);
   const [currentModal, setCurrentModal] = useState<ModalItem>(modalOptions[0]);
-  // 点击切换模型，并给出提示
+  // 点击切换{t('src.App.641555-0')}，并给出提示
   const handleModalClick = () => {
     const modalId = (currentModal.id + 1) % modalOptions.length;
     const nextModal = modalOptions[modalId];
@@ -30,8 +30,7 @@ const App: React.FC = () => {
   }
   // 语言切换功能
   const changeLanguage = () => {
-    const currentLang = i18n.language === 'zh_CN' ? 'zh' : 'en';
-    const newLang = currentLang === 'zh' ? 'en' : 'zh';
+    const newLang = i18n.language === 'zh' ? 'en' : 'zh';
     i18n.changeLanguage(newLang);
     setCurrentLang(langs[newLang].nativeName);
   }
@@ -46,9 +45,9 @@ const App: React.FC = () => {
           style={{ insetInlineEnd: 24 }}
           icon={<MenuFoldOutlined />}
         >
-          <FloatButton onClick={handleModalClick} icon={<RobotOutlined />} tooltip={<div>Modal</div>} />
+          <FloatButton onClick={handleModalClick} icon={<RobotOutlined />} tooltip={<div>{t('src.App.803547-0')}</div>} />
           <FloatButton onClick={() => { changeLanguage() }} icon={<SyncOutlined />} tooltip={<div>{currentLang}</div>} />
-          <FloatButton.BackTop visibilityHeight={0} tooltip={<div>Up</div>} />
+          <FloatButton.BackTop visibilityHeight={0} tooltip={<div>{t('src.App.803547-1')}</div>} />
         </FloatButton.Group>
         <PageHeader />
         <ManNamedForm />

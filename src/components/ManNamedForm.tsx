@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { Card, Space, Divider, Form, Radio, Input, Select, Button, ConfigProvider } from 'antd';
 import type { RadioChangeEvent } from 'antd';
 import { createStyles } from 'antd-style';
-import { genderList, popularList, nameOrigin, meanAndTheme, nicknameList } from '@/assets/nameOrigin';
+import { genderList, popularList, nameOrigin, meanAndTheme, nicknameList } from '@/assets/selectOptions.ts';
 import styles from './ManNamedForm.module.scss';
+import { useTranslation } from 'react-i18next';
 import { NameResults } from './NameResults';
 import { modalPresetPrompts } from '@/assets/modalOptions';
 
@@ -18,6 +19,7 @@ const ManNamedForm: React.FC = () => {
     const [nickname, setNickname] = useState<string>('');
     const [resShow, setResShow] = useState<boolean>(false);
     const [nameRes, setNameRes] = useState<string>('');
+    const { t } = useTranslation();
     const onGenderChange = (e: RadioChangeEvent) => {
         setGender(e.target.value);
     };
@@ -34,8 +36,14 @@ const ManNamedForm: React.FC = () => {
         setNickname(e.target.value);
     }
     // 下拉框选项
-    const nameOriginOptions = getOptions(nameOrigin);
-    const meanAndThemeOptions = getOptions(meanAndTheme);
+    const getOptions = (selectOptions: string[], kind: 'nameOrigin' | 'meanAndTheme') => {
+        return selectOptions.map((item) => {
+            const newItem = `${kind}.${item}`;
+            return { value: t(newItem), label: t(newItem) }
+        })
+    }
+    const nameOriginOptions = getOptions(nameOrigin, 'nameOrigin');
+    const meanAndThemeOptions = getOptions(meanAndTheme, 'meanAndTheme');
     // form label
     const labelStyle = {
         fontWeight: 650,
@@ -52,21 +60,22 @@ const ManNamedForm: React.FC = () => {
             <Card bordered={false} style={{ maxWidth: 650, fontSize: '20px' }} >
                 <Form layout='vertical' >
                     <p className={styles['form-introduce']}>
-                        Through Named by AI, unveil the ideal name you need. This is a clever name generator that uses artificial intelligence to find unique and meaningful names tailored specifically to your preferences.
+                        {t('components.ManNamedForm.introduce')}
                     </p>
                     <div className={styles['form-divider']}>
-                        <Divider >Please fill out the form below</Divider>
+                        <Divider >{t('components.ManNamedForm.tip')}</Divider>
                     </div>
-                    <Form.Item label={<label style={labelStyle}>What is your gender?</label>} name='gender'>
+                    <Form.Item label={<label style={labelStyle}>{t('components.ManNamedForm.q1')}</label>} name='gender'>
                         <Radio.Group onChange={onGenderChange}>
                             <Space direction="vertical">
                                 {genderList.map((item) => {
-                                    return <Radio key={item} value={item}>{item}</Radio>
+                                    const gender = `genderList.${item}`;
+                                    return <Radio key={item} value={gender}>{t(gender)}</Radio>
                                 })}
                             </Space>
                         </Radio.Group>
                     </Form.Item>
-                    <Form.Item label={<label style={labelStyle}>What is your preferred name origin?</label>} name='origin'>
+                    <Form.Item label={<label style={labelStyle}>{t('components.ManNamedForm.q2')}</label>} name='origin'>
                         <Select
                             showSearch
                             placeholder="No Preference"
@@ -77,7 +86,7 @@ const ManNamedForm: React.FC = () => {
                             variant="filled"
                         />
                     </Form.Item>
-                    <Form.Item label={<label style={labelStyle}>Would you like the name to have a specific meaning or theme?</label>} name='mean'>
+                    <Form.Item label={<label style={labelStyle}>{t('components.ManNamedForm.q3')}</label>} name='mean'>
                         <Select
                             showSearch
                             placeholder="No Preference"
@@ -88,23 +97,25 @@ const ManNamedForm: React.FC = () => {
                             variant="filled"
                         />
                     </Form.Item>
-                    <Form.Item label={<label style={labelStyle}>Do you want a popular or unique name?</label>} name='popular'>
+                    <Form.Item label={<label style={labelStyle}>{t('components.ManNamedForm.q4')}</label>} name='popular'>
                         <Radio.Group onChange={onPopularChange}>
                             <Space direction="vertical">
                                 {popularList.map((item) => {
-                                    return <Radio key={item} value={item}>{item}</Radio>
+                                    const popular = `popularList.${item}`;
+                                    return <Radio key={item} value={popular}>{t(popular)}</Radio>
                                 })}
                             </Space>
                         </Radio.Group>
                     </Form.Item>
-                    <Form.Item label={<label style={labelStyle}>Are there any names you would like to avoid due to personal reasons or associations?</label>} name='avoid'>
+                    <Form.Item label={<label style={labelStyle}>{t('components.ManNamedForm.q5')}</label>} name='avoid'>
                         <Input size="large" maxLength={80} showCount placeholder="e.g. Tim, Ethan" variant="filled" onChange={(e) => setAvoidNames(e.target.value)} />
                     </Form.Item>
-                    <Form.Item label={<label style={labelStyle}>Would you like a name with a nickname or shortened version?</label>} name='nickname'>
+                    <Form.Item label={<label style={labelStyle}>{t('components.ManNamedForm.q6')}</label>} name='nickname'>
                         <Radio.Group onChange={onNicknameChange}>
                             <Space direction="vertical">
                                 {nicknameList.map((item, index) => {
-                                    return <Radio key={index} value={item}>{item}</Radio>
+                                    const nickname = `nicknameList.${item}`;
+                                    return <Radio key={index} value={nickname}>{t(nickname)}</Radio>
                                 })}
                             </Space>
                         </Radio.Group>
@@ -115,7 +126,7 @@ const ManNamedForm: React.FC = () => {
                                 className: gradientStyle.linearGradientButton
                             }}
                         >
-                            <Button type="primary" size="large" shape="round" onClick={() => { renderResults(); setResShow(true) }}>Generate Names</Button>
+                            <Button type="primary" size="large" shape="round" onClick={() => { renderResults(); setResShow(true) }}>{t('generateName')}</Button>
                         </ConfigProvider>
                     </Form.Item>
                 </Form>
@@ -193,11 +204,7 @@ const dataPreprocess = (data: string): string => {
     return str;
 }
 
-const getOptions = (nameOrigin: string[]) => {
-    return nameOrigin.map((item) => {
-        return { value: item, label: item }
-    })
-}
+
 
 const useStyle = createStyles(({ prefixCls, css }) => ({
     linearGradientButton: css`

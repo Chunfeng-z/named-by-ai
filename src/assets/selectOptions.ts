@@ -7,13 +7,13 @@ export const genderList: string[] = [
 export const popularList: string[] = [
     'Popular',
     'Unique',
-    'No preference',
+    'No Preference',
 ]
 
 export const nicknameList: string[] = [
     'Yes',
     'No',
-    'No preference',
+    'No Preference',
 ]
 
 export const nameOrigin: string[] = [
@@ -35,7 +35,7 @@ export const nameOrigin: string[] = [
 ];
 
 export const meanAndTheme: string[] = [
-    'No preference',
+    'No Preference',
     'Nature',
     'Strength',
     'Love',
