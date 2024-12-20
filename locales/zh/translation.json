@@ -1,0 +1,71 @@
+{
+    "src.App.803547-0": "模型",
+    "src.App.803547-1": "上升",
+    "components.PageHeader.592797-0": "AI取名",
+    "components.PageFooter.083208-0": "AI为我的宠物取名",
+    "components.ManNamedForm.introduce": "通过人工智慧命名,揭开您需要的理想名字。这是一个聪明的名称产生器,它使用人工智慧来寻找专为您的喜好量身定制的独特而有意义的名称。",
+    "components.ManNamedForm.tip": "请填写以下表单",
+    "components.ManNamedForm.q1": "您的性别是什么？",
+    "components.ManNamedForm.q2": "您偏好的名字来源是什么？",
+    "components.ManNamedForm.q3": "您希望这个名字具有特定的含义或主题吗？",
+    "components.ManNamedForm.q4": "您想要一个流行的名字还是一个独特的名字？",
+    "components.ManNamedForm.q5": "有没有因为个人原因或联想而希望避免的名字？",
+    "components.ManNamedForm.q6": "您希望这个名字有昵称或缩写版本吗？",
+    "genderList": {
+        "Boy": "男",
+        "Girl": "女",
+        "Unknown": "未知"
+    },
+    "nameOrigin": {
+        "No Preference": "没有偏好",
+        "English": "英语",
+        "Spanish": "西班牙语",
+        "French": "法语",
+        "German": "德语",
+        "Italian": "意大利语",
+        "Portuguese": "葡萄牙语",
+        "Irish": "爱尔兰语",
+        "Indian": "印度语",
+        "Japanese": "日语",
+        "Korean": "韩语",
+        "Chinese": "汉语",
+        "Arabic": "阿拉伯语",
+        "Russian": "俄语",
+        "Hebrew": "希伯来语"
+    },
+    "meanAndTheme": {
+        "No Preference": "没有偏好",
+        "Nature": "自然",
+        "Strength": "力量",
+        "Love": "爱",
+        "Virtue": "美德",
+        "Luck": "幸运",
+        "Happiness": "幸福",
+        "Courage": "勇气",
+        "Wisdom": "智慧",
+        "Beauty": "美丽",
+        "Peace": "和平",
+        "Mythical": "神话",
+        "Artistic": "艺术",
+        "Historic": "历史",
+        "Spiritual": "精神",
+        "Other": "其他"
+    },
+    "popularList": {
+        "Popular": "受欢迎",
+        "Unique": "独特",
+        "No Preference": "没有偏好"
+    },
+    "nicknameList": {
+        "Yes": "是",
+        "No": "否",
+        "No Preference": "没有偏好"
+    },
+    "generateName": "生成名字",
+    "placeholder": {
+        "name": "没有偏好",
+        "mean": "没有偏好",
+        "eg": "例如：小明，小红"
+    },
+    "src.App.910614-0": "主题"
+}

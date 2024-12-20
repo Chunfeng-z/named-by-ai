@@ -1,0 +1,1 @@
+import{u as s,j as o}from"./index-CoRWMvgY.js";const r="_footer_9yiw9_1",t={footer:r,"footer-link":"_footer-link_9yiw9_5"},a=()=>{const{t:e}=s();return o.jsxs("section",{className:t.footer,children:["🐶",o.jsx("a",{className:t["footer-link"],children:e("components.PageFooter.083208-0")}),"✨"]})};export{a as default};

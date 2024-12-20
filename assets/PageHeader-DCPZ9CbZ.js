@@ -1,0 +1,1 @@
+import{u as s,j as a}from"./index-CoRWMvgY.js";const t="_header_190xs_1",r={header:t},o=()=>{const{t:e}=s();return a.jsxs("section",{className:r.header,children:[" ",e("components.PageHeader.592797-0"),"✨"]})};export{o as default};
