@@ -28,18 +28,24 @@ body {
 }
 
 
-/* ！TODO: 临时修改 */
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
     color: #213547;
     background-color: #48b8f4;
   }
 
   a:hover {
-    color: #747bff;
+    color: #c4c7ff;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color: #213547;
+    background-color: #353535;
   }
 
-  button {
-    background-color: #f9f9f9;
+  a:hover {
+    color: #92c5f8;
   }
 }

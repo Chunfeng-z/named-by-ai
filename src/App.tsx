@@ -1,7 +1,7 @@
 import React, { useState, Suspense } from 'react'
-import { FloatButton, message, Spin } from 'antd'
+import { FloatButton, message, Spin, ConfigProvider, theme } from 'antd'
 import { useTranslation } from 'react-i18next';
-import { MenuFoldOutlined, SyncOutlined, RobotOutlined } from '@ant-design/icons'
+import { MenuFoldOutlined, SyncOutlined, RobotOutlined, SunOutlined, MoonOutlined } from '@ant-design/icons'
 import { modalOptions, ModalItem } from './assets/modalOptions'
 import i18n from './i18n/i18n'
 import langs from './i18n/langs';
@@ -35,24 +35,36 @@ const App: React.FC = () => {
     setCurrentLang(langs[newLang].nativeName);
   }
 
+  // {t('src.App.910614-0')}切换功能
+  const [currentTheme, setCurrentTheme] = useState<'dark' | 'light'>('dark'); // 管理{t('src.App.910614-0')}状态
+  const changeTheme = () => {
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    setCurrentTheme(newTheme);
+  }
 
   return (
     <>
       {contextHolder}
-      <Suspense fallback={<Loading />}>
-        <FloatButton.Group
-          trigger="click"
-          style={{ insetInlineEnd: 24 }}
-          icon={<MenuFoldOutlined />}
-        >
-          <FloatButton onClick={handleModalClick} icon={<RobotOutlined />} tooltip={<div>{t('src.App.803547-0')}</div>} />
-          <FloatButton onClick={() => { changeLanguage() }} icon={<SyncOutlined />} tooltip={<div>{currentLang}</div>} />
-          <FloatButton.BackTop visibilityHeight={0} tooltip={<div>{t('src.App.803547-1')}</div>} />
-        </FloatButton.Group>
-        <PageHeader />
-        <ManNamedForm />
-        <PageFooter />
-      </Suspense>
+      {/* 使用antd 暗色{t('src.App.910614-0')} */}
+      <ConfigProvider theme={{
+        algorithm: currentTheme === 'dark' ? theme.darkAlgorithm : theme.defaultAlgorithm, // 动态切换{t('src.App.910614-0')},
+      }}>
+        <Suspense fallback={<Loading />}>
+          <FloatButton.Group
+            trigger="click"
+            style={{ insetInlineEnd: 24 }}
+            icon={<MenuFoldOutlined />}
+          >
+            <FloatButton onClick={changeTheme} icon={currentTheme === 'dark' ? <SunOutlined /> : <MoonOutlined />} tooltip={<div>{t('src.App.910614-0')}</div>} />
+            <FloatButton onClick={handleModalClick} icon={<RobotOutlined />} tooltip={<div>{t('src.App.803547-0')}</div>} />
+            <FloatButton onClick={() => { changeLanguage() }} icon={<SyncOutlined />} tooltip={<div>{currentLang}</div>} />
+            <FloatButton.BackTop visibilityHeight={0} tooltip={<div>{t('src.App.803547-1')}</div>} />
+          </FloatButton.Group>
+          <PageHeader />
+          <ManNamedForm />
+          <PageFooter />
+        </Suspense>
+      </ConfigProvider>
     </>
   )
 }
