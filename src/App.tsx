@@ -16,9 +16,9 @@ const PageFooter = React.lazy(() => import('@/components/PageFooter'));
 const App: React.FC = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const { t } = useTranslation();
-  const [currentLang, setCurrentLang] = useState<string>(langs[i18n.language].nativeName);
+  const [currentLang, setCurrentLang] = useState<string>(langs[i18n.language === 'zh_CN' ? 'zh' : 'en'].nativeName);
   const [currentModal, setCurrentModal] = useState<ModalItem>(modalOptions[0]);
-  // 点击切换{t('src.App.641555-0')}，并给出提示
+  // 点击切换模型，并给出提示
   const handleModalClick = () => {
     const modalId = (currentModal.id + 1) % modalOptions.length;
     const nextModal = modalOptions[modalId];
@@ -30,13 +30,13 @@ const App: React.FC = () => {
   }
   // 语言切换功能
   const changeLanguage = () => {
-    const newLang = i18n.language === 'zh' ? 'en' : 'zh';
+    const newLang = (i18n.language === 'zh' || i18n.language === 'zh_CN') ? 'en' : 'zh';
     i18n.changeLanguage(newLang);
     setCurrentLang(langs[newLang].nativeName);
   }
 
-  // {t('src.App.910614-0')}切换功能
-  const [currentTheme, setCurrentTheme] = useState<'dark' | 'light'>('dark'); // 管理{t('src.App.910614-0')}状态
+  // 主题切换功能
+  const [currentTheme, setCurrentTheme] = useState<'dark' | 'light'>('dark');
   const changeTheme = () => {
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
     setCurrentTheme(newTheme);
@@ -45,9 +45,9 @@ const App: React.FC = () => {
   return (
     <>
       {contextHolder}
-      {/* 使用antd 暗色{t('src.App.910614-0')} */}
+      {/* 使用antd 暗色主题 */}
       <ConfigProvider theme={{
-        algorithm: currentTheme === 'dark' ? theme.darkAlgorithm : theme.defaultAlgorithm, // 动态切换{t('src.App.910614-0')},
+        algorithm: currentTheme === 'dark' ? theme.darkAlgorithm : theme.defaultAlgorithm,
       }}>
         <Suspense fallback={<Loading />}>
           <FloatButton.Group
