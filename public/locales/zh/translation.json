@@ -61,5 +61,10 @@
         "No": "否",
         "No Preference": "没有偏好"
     },
-    "generateName": "生成名字"
+    "generateName": "生成名字",
+    "placeholder": {
+        "name": "没有偏好",
+        "mean": "没有偏好",
+        "eg": "例如：小明，小红"
+    }
 }

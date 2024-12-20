@@ -61,5 +61,10 @@
         "No": "No",
         "No Preference": "No Preference"
     },
-    "generateName": "Generate Names"
+    "generateName": "Generate Names",
+    "placeholder": {
+        "name": "No Preference",
+        "mean": "No Preference",
+        "eg": "e.g. Tim, Ethan"
+    }
 }

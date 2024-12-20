@@ -7,6 +7,7 @@ import styles from './ManNamedForm.module.scss';
 import { useTranslation } from 'react-i18next';
 import { NameResults } from './NameResults';
 import { modalPresetPrompts } from '@/assets/modalOptions';
+import i18n from '@/i18n/i18n';
 
 const ManNamedForm: React.FC = () => {
     // 重命令避免与css module冲突
@@ -15,7 +16,7 @@ const ManNamedForm: React.FC = () => {
     const [origin, setOrigin] = useState<string>('');
     const [mean, setMean] = useState<string>('');
     const [popular, setPopular] = useState<string>('');
-    const [avoidNames, setAvoidNames] = useState<string>('xxx');
+    const [avoidNames, setAvoidNames] = useState<string>('');
     const [nickname, setNickname] = useState<string>('');
     const [resShow, setResShow] = useState<boolean>(false);
     const [nameRes, setNameRes] = useState<string>('');
@@ -51,8 +52,10 @@ const ManNamedForm: React.FC = () => {
     }
     // 渲染获取的数据
     const renderResults = () => {
-        // !TODO: 在这里还需要拼接用户输入的信息
-        getResults(modalPresetPrompts['Chinese'], setNameRes);
+        const templateStr = `gender/性别：${gender}, name origin/名字来源：${origin}, 
+        name mean/含义：${mean}, popular/流行度：${popular}, name should avoid/避免出现以下名字：${avoidNames}, 
+        name with nickname/昵称：${nickname}. 你的所有回复请采用${i18n.language === 'en' ? '英文' : '中文'}回答`;
+        getResults(modalPresetPrompts['Chinese'] + templateStr, setNameRes);
     }
     return (
         <section className={styles.main} >
@@ -78,7 +81,7 @@ const ManNamedForm: React.FC = () => {
                     <Form.Item label={<label style={labelStyle}>{t('components.ManNamedForm.q2')}</label>} name='origin'>
                         <Select
                             showSearch
-                            placeholder="No Preference"
+                            placeholder={t('placeholder.name')}
                             optionFilterProp="label"
                             onChange={onOriginChangeSelect}
                             options={nameOriginOptions}
@@ -89,7 +92,7 @@ const ManNamedForm: React.FC = () => {
                     <Form.Item label={<label style={labelStyle}>{t('components.ManNamedForm.q3')}</label>} name='mean'>
                         <Select
                             showSearch
-                            placeholder="No Preference"
+                            placeholder={t('placeholder.mean')}
                             optionFilterProp="label"
                             onChange={onMeanChangeSelect}
                             options={meanAndThemeOptions}
@@ -108,7 +111,7 @@ const ManNamedForm: React.FC = () => {
                         </Radio.Group>
                     </Form.Item>
                     <Form.Item label={<label style={labelStyle}>{t('components.ManNamedForm.q5')}</label>} name='avoid'>
-                        <Input size="large" maxLength={80} showCount placeholder="e.g. Tim, Ethan" variant="filled" onChange={(e) => setAvoidNames(e.target.value)} />
+                        <Input size="large" maxLength={80} showCount placeholder={t('placeholder.eg')} variant="filled" onChange={(e) => setAvoidNames(e.target.value)} />
                     </Form.Item>
                     <Form.Item label={<label style={labelStyle}>{t('components.ManNamedForm.q6')}</label>} name='nickname'>
                         <Radio.Group onChange={onNicknameChange}>
@@ -196,12 +199,15 @@ const dataPreprocess = (data: string): string => {
         }
     });
     let str = '';
-    results.forEach((item: chunkItem) => {
-        if (item && item.choices[0].delta?.content) {
-            str += item.choices[0].delta?.content;
-        }
-    })
-    return str;
+    if (results) {
+        console.log('results', results);
+        results.forEach((item: chunkItem) => {
+            if (item && item?.choices?.length > 0 && item?.choices[0]?.delta?.content) {
+                str += item?.choices[0]?.delta?.content;
+            }
+        })
+    }
+    return str === '' ? 'No results' : str;
 }
 
 
