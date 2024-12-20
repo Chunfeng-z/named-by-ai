@@ -4,6 +4,7 @@ import { codeInspectorPlugin } from 'code-inspector-plugin'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/named-by-ai/',
   plugins: [react(),
     codeInspectorPlugin({
       bundler: 'vite',
