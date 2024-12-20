@@ -15,7 +15,7 @@ export const modalPresetPrompts: {
 export const modalOptions: ModalItem[] = [
     {
         id: 0,
-        name: 'Dou bao',
-        link: 'https://www.doubao.com/chat/'
+        name: 'Jina Chat',
+        link: 'https://chat.jina.ai/api'
     }
 ]
