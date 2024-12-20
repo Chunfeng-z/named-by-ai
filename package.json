@@ -2,17 +2,21 @@
   "name": "named-by-ai",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://Chunfeng-z.github.io/named-by-ai",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview --port 9999"
+    "preview": "vite preview --port 9999",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@ant-design/icons": "^5.5.2",
     "antd": "^5.22.5",
     "antd-style": "^3.7.1",
+    "gh-pages": "^6.2.0",
     "i18next": "^24.1.2",
     "i18next-browser-languagedetector": "^8.0.2",
     "i18next-http-backend": "^3.0.1",
